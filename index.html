@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racha da Sexta-Feira - Futsal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #0d47a1;
+            --secondary: #d32f2f;
+            --accent: #ffc107;
+            --light: #f5f5f5;
+            --dark: #212121;
+            --gray: #757575;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--primary), #1565c0);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+        
+        .logo h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Seções principais */
+        section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin: 30px 0;
+            padding: 30px;
+            overflow: hidden;
+        }
+        
+        section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        section h2 i {
+            color: var(--secondary);
+        }
+        
+        /* Tabelas */
+        .tables-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .table-wrapper {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        thead {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        th i {
+            margin-right: 8px;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.2s;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tbody tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        td {
+            padding: 16px 15px;
+        }
+        
+        .player-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .player-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .goals-count, .wins-count {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        /* Galerias */
+        .galleries-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .gallery {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .gallery h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .player-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .player-img {
+            height: 180px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--gray);
+        }
+        
+        .player-info {
+            padding: 20px;
+        }
+        
+        .player-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .player-info p {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .player-info .position {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+        
+        /* Medalhas */
+        .medal {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 8px;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .gold {
+            background-color: #ffd700;
+        }
+        
+        .silver {
+            background-color: #c0c0c0;
+        }
+        
+        .bronze {
+            background-color: #cd7f32;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .tables-container, .galleries-container {
+                flex-direction: column;
+            }
+            
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            .players-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-futbol"></i>
+                <h1>Racha da Sexta-Feira</h1>
+            </div>
+            <p class="subtitle">A maior pelada de futsal da região! Todos os jogadores, estatísticas e resultados atualizados semanalmente.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Tabelas de Jogadores e Goleiros -->
+        <div class="tables-container">
+            <!-- Tabela de Jogadores -->
+            <div class="table-wrapper">
+                <section>
+                    <h2><i class="fas fa-users"></i> Artilheiros do Racha</h2>
+                    <table id="players-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-user"></i> Jogador</th>
+                                <th><i class="fas fa-futbol"></i> Gols</th>
+                            </tr>
+                        </thead>
+                        <tbody id="players-table-body">
+                            <!-- Os jogadores serão inseridos aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            
+            <!-- Tabela de Goleiros -->
+            <div class="table-wrapper">
+                <section>
+                    <h2><i class="fas fa-tshirt"></i> Goleiros do Racha</h2>
+                    <table id="goalkeepers-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-user-shield"></i> Goleiro</th>
+                                <th><i class="fas fa-trophy"></i> Vitórias</th>
+                            </tr>
+                        </thead>
+                        <tbody id="goalkeepers-table-body">
+                            <!-- Os goleiros serão inseridos aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+
+        <!-- Galerias dos Melhores -->
+        <div class="galleries-container">
+            <!-- Galeria dos Melhores Artilheiros -->
+            <div class="gallery">
+                <section>
+                    <h3><i class="fas fa-crown"></i> Top 3 Artilheiros</h3>
+                    <div class="players-grid" id="top-scorers-gallery">
+                        <!-- Os melhores artilheiros serão inseridos aqui via JavaScript -->
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Galeria dos Melhores Goleiros -->
+            <div class="gallery">
+                <section>
+                    <h3><i class="fas fa-shield-alt"></i> Top 3 Goleiros</h3>
+                    <div class="players-grid" id="top-goalkeepers-gallery">
+                        <!-- Os melhores goleiros serão inseridos aqui via JavaScript -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Racha da Sexta-Feira</h3>
+                <p>Organizado por apaixonados por futsal | Todas as sextas às 19h</p>
+                <p>Local: Escola Paulo Sarasate</p>
+               
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+                <p class="copyright">&copy; 2026 Racha da Sexta-Feira. Todos os direitos reservados.</p>
+                 <p>Desenvolvido por Germano Lucas</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dados dos jogadores (24 jogadores)
+        const players = [
+            { name: "Serginho", goals: 4 },
+            { name: "Luciano", goals: 3 },
+            { name: "Neguinho", goals: 3 },
+            { name: "Saulo", goals: 2 },
+            { name: "Roberio", goals: 2 },
+            { name: "Robson", goals: 2 },
+            { name: "Junior Kabussu", goals: 1 },
+            { name: "Dudu", goals: 1 },
+            { name: "Fabin Montese", goals: 1 },
+            { name: "Caucaia", goals: 1 },
+            { name: "Toin Silvano", goals: 1 },
+            { name: "Germano", goals: 0 },
+            { name: "Leilson", goals: 0 },
+            { name: "Gabriel", goals: 0 },
+            { name: "Diogo", goals: 0 },
+            { name: "Breno", goals: 0 },
+            { name: "Daniel", goals: 0 },
+            { name: "Geilson", goals: 0 },
+            { name: "Stenio", goals: 0 },
+            { name: "Evin", goals: 0 },
+            { name: "Jerbin", goals: 0 },
+            { name: "Marcinho", goals: 0 },
+            { name: "Gabriel", goals: 0 },
+            { name: "Joao Paulo", goals: 0 }
+        ];
+
+        // Dados dos goleiros (5 goleiros)
+        const goalkeepers = [
+            { name: "Thiago", wins: 5 },
+            { name: "Bode", wins: 4 },
+            { name: "Davi", wins: 2 },
+            { name: "Rogerio Ceni", wins: 0 },
+            { name: "Julio Cesar", wins: 0 }
+        ];
+
+        // Ordenar jogadores por gols (maior para menor)
+        players.sort((a, b) => b.goals - a.goals);
+        
+        // Ordenar goleiros por vitórias (maior para menor)
+        goalkeepers.sort((a, b) => b.wins - a.wins);
+
+        // Preencher tabela de jogadores
+        const playersTableBody = document.getElementById('players-table-body');
+        players.forEach(player => {
+            const row = document.createElement('tr');
+            
+            // Criar avatar com iniciais
+            const initials = player.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            
+            row.innerHTML = `
+                <td>
+                    <div class="player-name">
+                        <div class="player-avatar">${initials.substring(0, 2)}</div>
+                        ${player.name}
+                    </div>
+                </td>
+                <td><span class="goals-count">${player.goals}</span></td>
+            `;
+            playersTableBody.appendChild(row);
+        });
+
+        // Preencher tabela de goleiros
+        const goalkeepersTableBody = document.getElementById('goalkeepers-table-body');
+        goalkeepers.forEach(goalkeeper => {
+            const row = document.createElement('tr');
+            
+            // Criar avatar com iniciais
+            const initials = goalkeeper.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            
+            row.innerHTML = `
+                <td>
+                    <div class="player-name">
+                        <div class="player-avatar">${initials.substring(0, 2)}</div>
+                        ${goalkeeper.name}
+                    </div>
+                </td>
+                <td><span class="wins-count">${goalkeeper.wins}</span></td>
+            `;
+            goalkeepersTableBody.appendChild(row);
+        });
+
+        // Preencher galeria dos melhores artilheiros (top 3)
+        const topScorersGallery = document.getElementById('top-scorers-gallery');
+        const topScorers = players.slice(0, 3);
+        
+        topScorers.forEach((player, index) => {
+            const medalClass = index === 0 ? 'gold' : index === 1 ? 'silver' : 'bronze';
+            const medalText = index === 0 ? '1°' : index === 1 ? '2°' : '3°';
+            const position = index === 0 ? 'Artilheiro do Racha' : index === 1 ? 'Vice-Artilheiro' : '3º Artilheiro';
+            
+            const playerCard = document.createElement('div');
+            playerCard.className = 'player-card';
+            playerCard.innerHTML = `
+                <div class="player-img">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="player-info">
+                    <h4><span class="medal ${medalClass}">${medalText}</span> ${player.name}</h4>
+                    <p>${player.goals} Gols</p>
+                    <div class="position">${position}</div>
+                </div>
+            `;
+            topScorersGallery.appendChild(playerCard);
+        });
+
+        // Preencher galeria dos melhores goleiros (top 3)
+        const topGoalkeepersGallery = document.getElementById('top-goalkeepers-gallery');
+        const topGoalkeepers = goalkeepers.slice(0, 3);
+        
+        topGoalkeepers.forEach((goalkeeper, index) => {
+            const medalClass = index === 0 ? 'gold' : index === 1 ? 'silver' : 'bronze';
+            const medalText = index === 0 ? '1°' : index === 1 ? '2°' : '3°';
+            const position = index === 0 ? 'Melhor Goleiro' : index === 1 ? '2º Melhor Goleiro' : '3º Melhor Goleiro';
+            
+            const goalkeeperCard = document.createElement('div');
+            goalkeeperCard.className = 'player-card';
+            goalkeeperCard.innerHTML = `
+                <div class="player-img">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="player-info">
+                    <h4><span class="medal ${medalClass}">${medalText}</span> ${goalkeeper.name}</h4>
+                    <p>${goalkeeper.wins} Vitórias</p>
+                    <div class="position">${position}</div>
+                </div>
+            `;
+            topGoalkeepersGallery.appendChild(goalkeeperCard);
+        });
+
+        // Adicionar efeito de destaque nas linhas da tabela ao passar o mouse
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#e3f2fd';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                if (Array.from(this.parentNode.children).indexOf(this) % 2 === 0) {
+                    this.style.backgroundColor = '#f9f9f9';
+                } else {
+                    this.style.backgroundColor = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
